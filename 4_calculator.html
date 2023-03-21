@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            background-color: #F5EFFF;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: #7371FC;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #calculator {
+            background-color: #F0F0F0;
+            border-radius: 15px;
+            padding: 20px;
+            display: inline-block;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.7);
+        }
+        input {
+            width: 225px;
+            height: 50px;
+            text-align: right;
+            font-size: 24px;
+            background-color: #F0F0F0;
+            border: none;
+            outline: none;
+            margin-bottom: 15px;
+            background-color: #F0F0F0;
+            color: #7371FC;
+        }
+        button {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            margin: 0;
+            border: none;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background-color: #F0F0F0;
+            color: #7371FC;
+            border-radius: 50%;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1), -3px -3px 8px rgba(255, 255, 255, 0.7);
+            margin: 5px;
+        }
+        button:active {
+            box-shadow: none;
+            background-color: #E0E0E0;
+        }
+    </style>
+    <script>
+        function appendValue(value) {
+            document.getElementById('result').value += value;
+        };
+        function appendOperator(operator) {
+            const result = document.getElementById('result').value;
+            if (result != '' && result.slice(-1) != operator) {
+                document.getElementById('result').value += operator;
+            };
+        };
+        function clearValues() {
+            document.getElementById('result').value='0';
+        };
+        function revertValue() {
+            const value_for_toggling = document.getElementById('result').value;
+            document.getElementById('result').value = -value_for_toggling;
+        };
+        function calculateResult() {
+            const result = eval(document.getElementById('result').value);
+            if (result != undefined) {
+                document.getElementById('result').value = result;
+            };
+        };
+        function percentageOfValue() {
+            document.getElementById('result').value /= 100;
+        }
+    </script>
+</head>
+<body>
+    <div id = calculator>
+ 
+        <br>
+        <input type="text" id="result" readonly>
+        <br>
+        <button onclick='clearValues()'>AC</button>
+        <button onclick='revertValue()'>+/-</button>
+        <button onclick='percentageOfValue()'>%</button>
+        <button onclick='appendOperator("/")'>/</button>
+        <br>
+        <button onclick='appendValue(7)'>7</button>
+        <button onclick='appendValue(8)'>8</button>
+        <button onclick='appendValue(9)'>9</button>
+        <button onclick='appendOperator("*")'>X</button>
+        <br>
+        <button onclick='appendValue(4)'>4</button>
+        <button onclick='appendValue(5)'>5</button>
+        <button onclick='appendValue(6)'>6</button>
+        <button onclick='appendOperator("-")'>-</button>
+        <br>
+        <button onclick='appendValue(1)'>1</button>
+        <button onclick='appendValue(2)'>2</button>
+        <button onclick='appendValue(3)'>3</button>
+        <button onclick='appendOperator("+")'>+</button>
+        <br>
+        <button onclick='appendValue(0)' id="zero">0</button>
+        <button onclick='appendValue(".")'>.</button>
+        <button onclick='calculateResult()'>=</button>
+    </div>
+</body>
+</html>
