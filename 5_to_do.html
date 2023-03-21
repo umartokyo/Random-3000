@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minimalistic To-Do List</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    width: 50%;
+    max-height: 80%;
+    overflow-y: auto;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  h1 {
+    text-align: center;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  .add-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  input {
+    outline: none;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    flex-grow: 1;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px rgba(255, 255, 255, 0.7);
+  }
+  button {
+    outline: none;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.7);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s;
+  }
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  .completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+  .task-buttons {
+    display: flex;
+    align-items: center;
+  }
+  .complete-btn, .delete-btn {
+    cursor: pointer;
+    margin-left: 5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    background: none;
+    border: none;
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Minimalistic To-Do List</h1>
+    <div class="add-item">
+      <input type="text" id="task-input" placeholder="Enter task...">
+      <button id="add-btn">Add</button>
+    </div>
+    <ul id="task-list"></ul>
+  </div>
+  <script>
+    const addBtn = document.getElementById('add-btn');
+    const taskInput = document.getElementById('task-input');
+    const taskList = document.getElementById('task-list');
+
+    addBtn.addEventListener('click', addTask);
+    taskInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+
+    function addTask() {
+      if (taskInput.value.trim()) {
+        const li = document.createElement('li');
+        li.textContent = taskInput.value.trim();
+
+        const taskButtons = document.createElement('div');
+        taskButtons.className = 'task-buttons';
+
+        const completeBtn = document.createElement('button');
+        completeBtn.textContent = '✓';
+        completeBtn.className = 'complete-btn';
+        completeBtn.addEventListener('click', () => {
+          li.classList.toggle('completed');
+          taskList.removeChild(li);
+          taskList.appendChild(li);
+        });
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '✗';
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.addEventListener('click', () => {
+          taskList.removeChild(li);
+        });
+
+        taskButtons.appendChild(completeBtn);
+        taskButtons.appendChild(deleteBtn);
+        li.appendChild(taskButtons);
+        taskList.appendChild(li);
+        taskInput.value = '';
+      }
+    }
+  </script>
+</body>
+</html>
