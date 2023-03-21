@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #222;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 0.5em;
+        }
+
+        h3#timer {
+            color: white;
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            gap: 1em;
+        }
+
+        button {
+            background-color: #444;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #666;
+        }
+    </style>
+    <script>
+        var isTimerOn = false;
+        var timer = 0;
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function formatTime(seconds) {
+            var minutes = Math.floor(seconds / 60);
+            var remainingSeconds = seconds % 60;
+
+            minutes = String(minutes).padStart(2, '0');
+            remainingSeconds = String(remainingSeconds).padStart(2, '0');
+    
+            return `${minutes}:${remainingSeconds}`;
+        }
+
+
+        async function incrementTimer() {
+            while (isTimerOn) {
+                timer++;
+                document.getElementById("timer").innerHTML = formatTime(timer);
+                await sleep(1000);
+            }
+        }
+
+        function startTimer() {
+            if (!isTimerOn) {
+                isTimerOn = true;
+                incrementTimer();
+            }
+        };
+
+        function stopTimer() {
+            isTimerOn = false;
+        };
+
+        function resetTimer() {
+            isTimerOn = false;
+            timer = 0;
+            document.getElementById("timer").innerHTML = timer;
+        };
+    </script>
+</head>
+<body>
+    <h1>Timer</h1>
+    <h3 id="timer">0</h3>
+    <ul>
+        <li>
+            <button onclick="startTimer()">Start</button>
+        </li>
+        <li>
+            <button onclick="stopTimer()">Stop</button>
+        </li>
+        <li>
+            <button onclick="resetTimer()">Reset</button>
+        </li>
+    </ul>
+</body>
+</html>
