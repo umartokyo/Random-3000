@@ -8,3 +8,4 @@
 3. Timer - Minimal timer, my first project in Javascript
 4. Calculator - Minimal calculator, with beautiful neuromorphic design
 5. To Do - Minimal todo list with beautiful neuromorphic design
+6. Math Debate - Solution to the debate about one math problem solution with my math teacher
