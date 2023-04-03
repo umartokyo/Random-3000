@@ -9,3 +9,5 @@
 4. Calculator - Minimal calculator, with beautiful neuromorphic design
 5. To Do - Minimal todo list with beautiful neuromorphic design
 6. Math Debate - Solution to the debate about one math problem solution with my math teacher
+
+If you know what other project I can do, please tell me :)
